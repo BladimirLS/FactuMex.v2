@@ -1,0 +1,330 @@
+
+.notif {
+    width: 400px;
+    position: absolute;
+    background-color: orange;
+    color: black;
+    border: 1px solid black;
+    opacity: 1;
+    z-index: 200;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 30px;
+}
+
+    .notif > label {
+        font-family: Calibri;
+        font-size: small
+    }
+
+.guardar {
+    position: absolute;
+    left: 50px;
+    z-index: 201;
+    width: 200px;
+    height: 80px;
+    background-color: whitesmoke;
+    color: black;
+    font-family: Calibri;
+    font-size: small;
+    border: 1px solid dimgray;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+    .guardar > label {
+        padding-top: 10px;
+        padding-left: 10px;
+    }
+
+    .guardar > input[type=text] {
+        border: 1px solid transparent;
+        font-family: Calibri;
+        font-size: small;
+        margin-left: 2%;
+        width: 90%;
+        border-bottom: 1px solid gray;
+        background-color: transparent;
+    }
+
+.btnActn {
+    background: rgb(0,71,187);
+    background: linear-gradient(90deg, rgba(0,71,187,1) 0%, rgb(0, 148, 255) 100%);
+    color: white;
+    width: 100px;
+    height: 80px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: 10px;
+    padding-top: 15px;
+    border: 1px solid lightgray;
+}
+
+    .btnActn:hover {
+        background-color: dimgray;
+        border: 1px solid black;
+    }
+
+.sel {
+    border: 1px solid transparent;
+    border-color: transparent;
+    font-family: Calibri;
+    font-size: small;
+    width: 200px;
+}
+
+.menuGral {
+    background: rgb(0,71,187);
+    background: linear-gradient(90deg, rgba(0,71,187,1) 0%, rgb(0, 148, 255) 100%);
+    color: white;
+}
+
+label {
+    font-family: Calibri;
+    font-size: small;
+}
+
+input[type='text'] {
+    width: 100%;
+    font-family: Calibri;
+    font-size: small;
+    margin-bottom: 5px;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.button {
+    width: 70px;
+    margin-left: 5px;
+    background-color: black;
+    color: white;
+    float: left;
+    text-align: center;
+    border: 1px solid gray;
+    font-family: Calibri;
+    font-size: small;
+}
+
+.wrap {
+    width: 90%;
+    padding: 0px 10px 10px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 90vh;
+    height: 90vh;
+    padding-left: 50px;
+}
+
+.wrap2 {
+    background-color: white;
+    width: 90%;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid gray;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 90vh;
+    height: 90vh;
+}
+
+a {
+    color: black
+}
+
+.agentFocus:hover {
+    background-color: dodgerblue
+}
+
+    .agentFocus:hover > a {
+        color: white
+    }
+
+.agentFocus2:hover {
+    background-color: firebrick
+}
+
+    .agentFocus2:hover > a {
+        color: white
+    }
+
+
+.Files {
+    border: 1px solid lightgrey;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    margin-top:55px;
+    margin-left: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 70vh;
+}
+
+.fileSel {
+    background-color: lightgray;
+    border: 1px solid gray;
+}
+
+.fIcon {
+    padding-top: 8px;
+}
+
+.previaWrap {
+    height: 70vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.relWrap {
+    height: 70vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.previa {
+    font-family: Calibri;
+    width: 95%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+    .previa > thead {
+        background: rgb(0,71,187);
+        background: linear-gradient(180deg, rgba(0,71,187,1) 0%, rgb(0, 148, 255) 100%);
+        color: white;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+
+
+        .previa > thead > tr:first-child > th {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            width: 100%;
+            font-family: Calibri;
+            font-size: smaller;
+            font-weight: normal;
+            border-bottom: 1px solid lightgrey;
+            height: 30px;
+            padding-left: 20px;
+        }
+
+        .previa > thead > tr:nth-child(2) > th {
+            padding-left: 10px;
+            padding-top: 5px;
+            font-size: smaller;
+            font-weight: normal;
+            background-color: lightgray;
+            color: black;
+            width: 50%;
+        }
+
+    .previa > tbody > tr:nth-child(odd) {
+        background-color: whitesmoke;
+    }
+
+    .previa > tbody > tr > td {
+        border-right: 1px solid lightgrey;
+        border-left: 1px solid lightgrey;
+        padding-left: 10px;
+        font-family: Calibri;
+        font-size: small;
+    }
+
+    .previa > tbody > tr {
+        border-bottom: 1px solid lightgrey;
+    }
+
+.Actualizar {
+    height: 50px;
+    width: 95%;
+    background: rgb(0,71,187);
+    background: linear-gradient(90deg, rgba(0,71,187,1) 0%, rgb(0, 148, 255) 100%);
+    color: white;
+    font-family: Tahoma;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid lightgrey;
+    padding-top: 12px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-top: 50px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+    .Actualizar:hover {
+        background-color: dimgray
+    }
+
+.lblAnex {
+    position: absolute;
+    z-index: 110;
+    height: 50px;
+    width: 95%;
+    background: rgb(0,71,187);
+    background: linear-gradient(90deg, rgba(0,71,187,1) 0%, rgb(0, 148, 255) 100%);
+    color: white;
+    text-align: left;
+    font-family: Calibri;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid lightgrey;
+    padding-top: 7px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.loading {
+    position: absolute;
+    z-index: 150;
+    margin-left: 30%;
+    margin-top: 30vh;
+    background-color: white;
+    border: 1px solid lightgrey;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    -webkit-box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.75);
+}
+
+.fileAU::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+input[type='file'] {
+    color: transparent;
+    background-color: transparent;
+}
+
+.fileAU {
+    position: absolute;
+    z-index: 115;
+    left: 0px;
+    width: 90%;
+    height: 50px;
+    margin-left: 13%;
+}
+
+    .fileAU::before {
+        display: inline-block;
+        outline: none;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        cursor: pointer;
+        font-family: Calibri;
+        font-size: small
+    }

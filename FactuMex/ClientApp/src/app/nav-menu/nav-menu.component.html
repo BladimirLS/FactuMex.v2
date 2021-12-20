@@ -1,0 +1,126 @@
+<div [ngClass]="{'main-nav':isExpanded,'min':!isExpanded,'max':isExpanded}">
+    <table align="center" class="tLogo"  *ngIf="isExpanded && !invisible">
+        <tr>
+            <td>
+                <img src="/img/logo_domex.png" width="88" *ngIf="isExpanded" class="logo"/>
+                <img src="/img/logo_domex.png" width="22" *ngIf="!isExpanded" class="logo" />
+            </td>
+        </tr>
+    </table>
+    <ul [ngClass]="{'invisible':invisible}">
+        <li *ngIf="servicio.VerificaPermiso('Dashboard.Ver')" (click)="selm='Dashboard';router.navigateByUrl('');" [ngClass]="{'selected':selm=='Dashboard','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/">
+                    <img src="/img/dashboard.png" width="24" />
+                    <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Dashboard</label>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('LstCliente.Ver')" (click)="selm='LstCliente';router.navigateByUrl('/lstcliente');" [ngClass]="{'selected':selm=='LstCliente','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/lstcliente">
+                    <span>
+                        <img src="/img/customer.png" width="20" style="margin-left:3px;" />
+                        <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Clientes</label>
+                    </span>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('LstProductos.Ver')" (click)="selm='LstProductos';router.navigateByUrl('/lstproducto');" [ngClass]="{'selected':selm=='LstProductos','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/lstproducto">
+                    <span>
+                        <img src="/img/box.png" width="20" style="margin-left:3px;" />
+                        <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Productos</label>
+                    </span>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('Facturacion.Ver')" (click)="selm='Facturacion';router.navigateByUrl('/factura');" [ngClass]="{'selected':selm=='Facturacion','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/factura">
+                    <span>
+                        <img src="/img/inv.png" width="20" style="margin-left:3px;" />
+                        <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Facturación</label>
+                    </span>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('Comprobantes.Ver')" (click)="selm='Comprobantes';router.navigateByUrl('/comprobante');" [ngClass]="{'selected':selm=='Comprobantes','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/comprobante">
+                    <span>
+                        <img src="/img/sec.png" width="20" style="margin-left:3px;" />
+                        <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Comprobantes</label>
+                    </span>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('Config.Ver')" (click)="selm='Conf';router.navigateByUrl('/config');" [ngClass]="{'selected':selm=='Conf','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/config">
+                    <span>
+                        <img src="/img/gear.png" width="16" style="margin-left:3px;" />
+                        <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Configuración</label>
+                    </span>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('Valija.Ver')" (click)="selm='Valija';router.navigateByUrl('/valija');" [ngClass]="{'selected':selm=='Valija','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/valija">
+                    <span>
+                        <img src="/img/briefcase-256.png" width="16" style="margin-left:3px;" />
+                        <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Valija</label>
+                    </span>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('Usuario.Ver')" (click)="selm='Usuario';router.navigateByUrl('/usuario');" [ngClass]="{'selected':selm=='Usuario','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/usuario">
+                    <img src="/img/user.png" width="24" />
+                    <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Usuarios</label>
+                </a>
+            </span>
+        </li>
+        <li *ngIf="servicio.VerificaPermiso('Tasa.Ver')" (click)="selm='Tasa';router.navigateByUrl('/tasa');" [ngClass]="{'selected':selm=='Tasa','mini-nav':!isExpanded}">
+            <span>
+                <a routerLink="/tasa">
+                    <img src="/img/curren.png" width="24" />
+                    <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Tasa US$</label>
+                </a>
+            </span>
+        </li>
+        <li (click)="toggle()" [ngClass]="{'mini-nav':!isExpanded}">
+            <span>
+                <a (click)="callCancell()">
+                    <img src="/img/minimize.png" width="24" />
+                    <label [ngClass]="{'titMenu':!isExpanded}" *ngIf="isExpanded">&nbsp;Minimizar</label>
+                    <label [ngClass]="{'titMenu':!isExpanded}" *ngIf="!isExpanded">&nbsp;Maximizar</label>
+                </a>
+            </span>
+        </li>
+        <li (click)="sinMenu()" [ngClass]="{'mini-nav':!isExpanded}" *ngIf="isExpanded">
+            <span>
+                <a (click)="callCancell()">
+                    <img src="/img/hamenu.png" width="24" />
+                    <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Flotante</label>
+                </a>
+            </span>
+        </li>
+        <li (click)="Salir()" [ngClass]="{'mini-nav':!isExpanded}">
+            <span>
+                <a href="#salir">
+                    <img src="/img/lock.png" width="24" />
+                    <label [ngClass]="{'titMenu':!isExpanded}">&nbsp;Salir</label>
+                </a>
+            </span>
+        </li>
+    </ul>
+    <table align="center" class="tFoto" *ngIf="isExpanded">
+        <tr>
+            <td style="text-align:center"><span [ngClass]="{'liFoto': isExpanded, 'liFoto2': !isExpanded}"><img *ngIf="isExpanded && usuario.Foto!=''" class="foto" src="/img/{{usuario.Foto}}" width="64" height="64" /><img *ngIf="!isExpanded && usuario.Foto!=''" class="foto" src="/img/{{usuario.Foto}}" width="32" height="32" /></span><label class="Usuario" *ngIf="isExpanded">{{usuario.Nombre}}</label></td>
+        </tr>
+    </table>
+</div>

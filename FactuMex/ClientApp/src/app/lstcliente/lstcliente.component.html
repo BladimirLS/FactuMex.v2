@@ -1,0 +1,67 @@
+<script src="lstcliente.ts"></script>
+<div class="wrap" #wrap>
+    <div [ngClass]="{'lblAnex':!wizardFac,'lblAnex2':wizardFac}">
+        <ul [ngClass]="{'ulMenu':!wizardFac,'ulMenu2':wizardFac}">
+            <li *ngIf="!wizardFac"><label class="titFn">Buscar Cliente</label></li>
+            <li>
+                <input type="text" class="inpFrm" placeholder="Nombre, ID o Teléfono" (keydown)="cargaCliente($event);" [(ngModel)]="inp"  />
+            </li>
+            <li *ngIf="!wizardFac">
+                <a routerLink="/cliente">
+                    <img src="/img/customer.png" width="28" />&nbsp;Nuevo
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div *ngFor="let c of cliente" class="col-lg-3 cardDomex">
+            <div class="row">
+                <div class="col-sm-9">
+                    <ul class="cliRes">
+                        <li><span class="smTit">Nombre</span></li>
+                        <li><span class="smDat">{{c.Nombre}}</span></li>
+                        <li><span class="smTit"></span></li>
+                        <li>
+                            <table class="tInfo">
+                                <tr>
+                                    <td class="smTit">ID</td>
+                                    <td class="smTit">Teléfono</td>
+                                </tr>
+                                <tr>
+                                    <td class="smDat">{{c.Id}}</td>
+                                    <td class="smDat">{{c.Tel1}}</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li><span class="smTit">Correo</span></li>
+                        <li><span class="smDat">{{c.Correo}}</span></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <table align="right">
+                        <tr>
+                            <td>
+                                <img src="/img/customer.png" width="64" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tIcons">
+                <label class="imgSel" *ngIf="wizardFac" (click)="cCliente=c;valueChanged();">
+                    <img src="/img/checkm.png" width="24" />
+                </label>
+                <label class="imgActn" *ngIf="!wizardFac">
+                    <a routerLink="/cliente/{{c.Idente}}">
+                        <img src="/img/pencil.png" width="24" />
+                    </a>
+                </label>
+                <label class="imgActn" *ngIf="!wizardFac">
+                    <a [routerLink]="" (click)="delete(c.Idente);cargaTodosClientes()">
+                    <img src="/img/trash.png" width="24" />
+                    </a>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

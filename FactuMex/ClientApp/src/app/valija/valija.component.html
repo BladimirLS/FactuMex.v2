@@ -1,0 +1,214 @@
+<div class="wrap" #wrap>
+    <div class="lblAnex">
+        <ul class="ulMenu">
+            <li><label class="titFn" *ngIf="!envalijar && !envalijar">Gestión de Valijas</label><label class="titFn" *ngIf="envalijar">Envalijar</label></li>
+            <li (click)="nuevaValija()" *ngIf="!envalijar">
+                <img src="/img/briefcase-256.png" width="28" />&nbsp;Nueva
+            </li>
+            <li (click)="guardaValija()" *ngIf="showValija && !envalijar">
+                <img src="/img/cloud.png" width="32" />&nbsp;Guardar
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+            <li *ngIf="showValija && !envalijar">
+                <img src="/img/shred.jpg" width="32" />Borrar
+            </li>
+            <li *ngIf="envalijar" (click)="terminarEnvalijado();">
+                <img src="/img/lock-256.png" width="32" />Cerrar
+            </li>
+        </ul>
+    </div>
+    <div class="row frmUsuario" *ngIf="showValija && !envalijar">
+        <div class="col-lg-11 Frm">
+            <!-- Generales de la Valija-->
+            <div class="row">
+                <div class="col-lg-12" [ngClass]="{'inpFocus':foc==2}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cValija.Etiqueta.length>0"><label>Etiqueta</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Etiqueta" [(ngModel)]="cValija.Etiqueta" class="inpFrm" (focus)="foc=2;" (focusout)="foc=0;" (keydown)="clrNotif();" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cValija.Etiqueta'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==2}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cValija.Fecha.length>0"><label>Fecha</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input readonly type="text" placeholder="Fecha" [(ngModel)]="cValija.Fecha" class="inpFrm" (focus)="foc=2;" (focusout)="foc=0;" (keydown)="clrNotif();" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cValija.Fecha'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==3}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cValija.Cb.length>0"><label>Código de Barra</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Código de Barra" [(ngModel)]="cValija.Cb" class="inpFrm" (focus)="foc=3;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cValija.Cb'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==2}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cValija.Cs.length>0"><label>Código de Seguridad</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Código de Seguridad" [(ngModel)]="cValija.Cs" class="inpFrm" (focus)="foc=2;" (focusout)="foc=0;" (keydown)="clrNotif(); " />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cValija.Cs'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==3}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cValija.Usuario.length>0"><label>Usuario</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Usuario" [(ngModel)]="cValija.Usuario" class="inpFrm" (focus)="foc=3;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cValija.Usuario'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" *ngIf="!envalijar">
+        <div *ngFor="let v of valijas" class="col-lg-3 cardDomex">
+            <table align="center">
+                <tr>
+                    <td>Etiqueta</td>
+                    <td>{{v.Etiqueta}}</td>
+                </tr>
+                <tr>
+                    <td>Encargado</td>
+                    <td>{{v.Usuario}}</td>
+                </tr>
+                <tr>
+                    <td>Código de Barra</td>
+                    <td>{{v.Cb}}</td>
+                </tr>
+                <tr>
+                    <td>Código de Seguridad</td>
+                    <td>{{v.Cs}}</td>
+                </tr>
+                <tr>
+                    <td>Vencimiento</td>
+                    <td>{{v.Fecha.split('T')[0]}}</td>
+                </tr>
+
+            </table>
+            <div class="tIcons">
+                <label class="imgActn" (click)="cValija=v;">
+                    <img src="/img/pencil.png" width="24" />
+                </label><label class="imgActn">
+                    <img src="/img/trash.png" width="24" />
+                </label><label class="imgActn" (click)="cValija=v;envalijar=true;cargaFacturas();">
+                    <img src="/img/barcode-512.png" width="24" />
+                </label><label class="imgActn" (click)="cValija=v;envalijar=true;desenvalijar=true;cargaFacturas();">
+                    <img src="/img/whole-hand-256.png" width="24" />
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row buscaFac" *ngIf="envalijar">
+        <div class="col-lg-12">
+            <input type="text" class="inpFrm" (keyup)="buscaFacs()" [(ngModel)]="buscar"/>
+        </div>
+        <div class="col-lg-12">
+            <label>Pendientes: {{facturas.length}}</label>
+        </div>
+        <div class="col-lg-3 cardDomex" *ngFor="let f of facturasF">
+
+            <table align="center">
+                <tr>
+                    <td>Factura</td>
+                    <td>{{f.Fac.Idfactura}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha</td>
+                    <td>{{f.Fac.Fecha}}</td>
+                </tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td>{{f.Cliente.Ente.Nombre}}</td>
+                </tr>
+                <tr>
+                    <td>Correo</td>
+                    <td>{{f.Cliente.Ente.Correo}}</td>
+                </tr>
+                <tr>
+                    <td>Tel. 1</td>
+                    <td>{{f.Cliente.Ente.Tel1}}</td>
+                </tr>
+                <tr>
+                    <td>Tel. 2</td>
+                    <td>{{f.Cliente.Ente.Tel2}}</td>
+                </tr>
+                <tr>
+                    <td>Tel. 3</td>
+                    <td>{{f.Cliente.Ente.Tel3}}</td>
+                </tr>
+                <tr>
+                    <td>Tickets</td>
+                    <td><label *ngFor="let t of f.Tickets">{{t.Ref}}&nbsp;-&nbsp;</label></td>
+                </tr>
+                <tr>
+                    <td>Relacionados</td>
+                    <td><label *ngFor="let r of f.Rels">{{r.Ref}}&nbsp;-&nbsp;</label></td>
+                </tr>
+            </table>
+            <div class="tIcons">
+                <label class="imgActn" (click)="printFac(f.Fac.Idfactura);">
+                    <img src="/img/printer.png" width="24" />
+                </label>
+                <label class="imgActn" (click)="colocaEnValija(f);">
+                    <img src="/img/checkm.png" width="24" />
+                </label>
+                <label class="imgActn" (click)="showMenu=f.Fac.Idfactura;" *ngIf="!desenvalijar">
+                    ...
+                </label>
+                <ul class="listaRef" *ngIf="showMenu==f.Fac.Idfactura">
+                    <li class="closePopup"><label class="x" (click)="showMenu=0;">X</label></li>
+                    <li>DESPACHO INCOMPLETO</li>
+                    <li *ngFor="let r of f.Rels" class="incomp" (click)="cambiaRel(r)">&nbsp;<img src="/img/checkm.png" width="16" *ngIf="incomp.includes(r)" /> &nbsp;{{r.Ref}}</li>
+                    <li (click)="colocaEnValijaInc(f);">DESPACHAR A DOMEX</li>
+                </ul>
+            </div>
+            <label class="incompleta" *ngIf="f.Stat=='I'">ENVÍO INCOMPLETO</label>
+            <label class="completada" *ngIf="f.Stat=='E' && desenvalijar">ENVÍO COMPLETADO</label>
+            <label class="regular" *ngIf="f.Stat=='C' && desenvalijar">ENVÍO REGULAR</label>
+        </div>
+    </div>
+</div>

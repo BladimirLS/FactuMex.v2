@@ -1,0 +1,227 @@
+.invisible {
+width:100%;
+}
+
+a {
+    cursor: pointer;
+}
+
+.foto {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+
+@media (max-width: 1211px) {
+    ul > li > span > a {
+        font-size: 12px;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 1212px) {
+    ul > li > span > a {
+        font-size: 16px;
+        cursor: pointer;
+    }
+}
+
+.Usuario {
+    font-family: 'Open Sans',sans-serif;
+    font-size: small;
+    color: black;
+    text-align: center;
+    width: 100%;
+}
+
+
+.min {
+    width: 35px;
+    position: absolute;
+    z-index: 199;
+}
+
+    .min > ul > li {
+        margin-top: 10px;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+        .min > ul > li > span > a > img {
+            margin-left: 3px;
+        }
+
+.max {
+    width: auto;
+}
+
+.main-nav {
+    background: rgb(252,217,29);
+    background: linear-gradient(180deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+    height: 100%;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.mini-nav {
+    background: rgb(252,217,29);
+    background: linear-gradient(180deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+}
+
+    .mini-nav:hover {
+        -webkit-animation-name: expand; /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+        animation-name: expand;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+    }
+
+.titMenu {
+    width: 0px;
+    opacity: 0;
+}
+
+.mini-nav:hover label {
+    -webkit-animation-name: appear;
+    -webkit-animation-duration: 1s;
+    animation-name: appear;
+    animation-duration: 0.8s;
+    animation-delay: 0.7s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+@-webkit-keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        width: 80px;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        width: 80px;
+    }
+}
+
+@-webkit-keyframes expand {
+    from {
+        background: rgb(252,217,29);
+        background: linear-gradient(180deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+    }
+
+    to {
+        background: green;
+        background: linear-gradient(120deg, white 0%, #E5E5E5 100%);
+        width: 140px;
+    }
+}
+
+@keyframes expand {
+    from {
+        background: rgb(252,217,29);
+        background: linear-gradient(180deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+    }
+
+    to {
+        background: green;
+        background: linear-gradient(120deg, white 0%, #E5E5E5 100%);
+        width: 140px;
+    }
+}
+
+ul {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    width: 100%
+}
+
+    ul > li {
+        list-style: none;
+        list-style-image: none;
+        list-style-position: inherit;
+        list-style-type: none;
+        margin: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        width: 100%;
+        cursor: pointer
+    }
+
+        ul > li > span {
+            width: 100%;
+            cursor: pointer
+        }
+
+            ul > li > span > a {
+                color: black;
+                font-family: 'Open Sans',sans-serif;
+                text-decoration: none;
+                margin-left: 5px;
+                cursor: pointer;
+                font-size: small;
+            }
+
+.minA {
+    background-color: #E5E5E5;
+}
+
+ul > li:hover {
+    background-color: #E5E5E5;
+    background: linear-gradient(100deg, white 0%, #E5E5E5 100%);
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+    ul > li:hover > span > a > img {
+        background-color: #FCD91D;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    ul > li:hover > span > a > span > img {
+        background-color: #FCD91D;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    ul > li:hover > span > a {
+        cursor: pointer;
+        width: 150px;
+        border-bottom-left-radius: 10px;
+    }
+
+.selected, ul > li:active {
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.tFoto {
+    margin-top: 50px;
+}
+
+.tLogo {
+    margin-bottom: 20px;
+}
+
+.logo {
+    margin-top: 20px;
+}

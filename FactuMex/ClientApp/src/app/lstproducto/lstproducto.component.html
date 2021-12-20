@@ -1,0 +1,52 @@
+<div class="wrap" #wrap>
+    <div [ngClass]="{'lblAnex':!wizardFac,'lblAnex2':wizardFac}">
+        <ul [ngClass]="{'ulMenu':!wizardFac,'ulMenu2':wizardFac}">
+            <li *ngIf="!wizardFac"><label class="titFn">Buscar Producto</label></li>
+            <li *ngIf="!wizardFac">
+                <input type="text" class="inpFrm" placeholder="Nombre o Descripción" (keydown)="cargaProductos($event);" [(ngModel)]="inp" />
+            </li>
+            <li *ngIf="!wizardFac">
+                <a routerLink="/producto">
+                    <img src="/img/box.png" width="28" />&nbsp;Nuevo
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div *ngFor="let p of producto" class="col-lg-2 cardDomex">
+            <div class="row">
+                <div class="col-lg-9">
+                    <ul class="cliRes">
+                        <li><span class="smTit">Nombre</span></li>
+                        <li class="sp"><span class="smDat">{{p.Nombre}}</span></li>
+                        <li><span class="smTit">Descripción</span></li>
+                        <li><span class="smDat">{{p.Descripcion}}</span></li>
+                    </ul>
+
+                </div>
+                <div class="col-lg-3">
+                    <table align="right">
+                        <tr>
+                            <td><img src="/img/box.png" width="48" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="tIcons">
+                <label class="imgSel" *ngIf="wizardFac" (click)="cProducto=p;valueChanged();">
+                    <img src="/img/checkm.png" width="24" />
+                </label>
+                <label class="imgActn" *ngIf="!wizardFac">
+                    <a routerLink="/producto/{{p.Iditem}}">
+                        <img src="/img/pencil.png" width="24" />
+                    </a>
+                </label>
+                <label class="imgActn" *ngIf="!wizardFac">
+                    <a [routerLink]="" (click)="delete(p.Iditem);" href="lstproducto.component.html">
+                    <img src="/img/trash.png" width="24" />
+                    </a>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

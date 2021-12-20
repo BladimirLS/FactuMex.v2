@@ -1,0 +1,27 @@
+<div class="bigSquare">
+    <table class="tPopup">
+        <tr class="header">
+            <td><div class="title"><label>RenoMax - {{hdr}} - {{timerCntr}}</label></div></td>
+        </tr>
+        <tr class="body">
+            <td><p class="msj">{{popupInfo.Msg}}</p></td>
+        </tr>
+        <tr class="footer">
+            <td style="text-align:center">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <span class="button" (click)="Accion('Si')" *ngIf="showSi">Si</span>
+                        </td>
+                        <td>
+                            <span class="button" (click)="Accion('No')"*ngIf="showNo">No</span>
+                        </td>
+                        <td>
+                            <span class="button" (click)="Accion('Ok')" *ngIf="showOk">Ok</span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

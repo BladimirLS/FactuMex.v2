@@ -1,0 +1,38 @@
+<div class="wrap">
+    <div class="Panel">
+        
+        <div [ngClass]="{'logCont':login,'centerdiv':!login}">
+            <div [ngClass]="{'posTable':login,'notLoginHdr':!login}">
+                <div [ngClass]="{'loginHdr':login,'notLoginHdr':!login}">
+                    <table class="tLogin" align="center">
+                        <tr *ngIf="login">
+                            <td class="tdImg">
+                                <img *ngIf="usuario.Foto!=''" class="foto2" src="/img/{{usuario.Foto}}" width="128" /><img *ngIf="usuario.Foto==''" class="foto" src="/img/logo_domex.png" width="128" /><br />
+                                <label *ngIf="Notif.Msj.length>0" class="lblNotif" >{{Notif.Msj}}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="button" *ngIf="!login" class="btnDomex" value="INICIAR" (click)="login=true;" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <table class="tLogin" align="center" *ngIf="login">
+                    <tr>
+                        <td class="tdInp"><img src="/img/user.png" width="24" /><input (focus)="enfocado()" class="inpFrm" type="text" placeholder="Correo Electronico" (change)="cargaUsuario($event)" (keyup)="cargaUsuario($event)" [(ngModel)]="Email" /></td>
+                    </tr>
+                    <tr >
+                        <td [ngClass]="{'tdInp': usuario.IDUsuario != '0', 'tdNone': usuario.IDUsuario == '0'}"><img src="/img/lock.png" width="20" /><input (focus)="enfocado()" #pwd class="inpFrm" type="password" placeholder="Contrasena" (keydown)="iniciaSesion($event)" [(ngModel)]="Pwd" /></td>
+                    </tr>
+                    <tr>
+                        <td><input class="btnDomex" type="submit" value="INICIAR SESIÓN" (focus)="enfocado()" (click)="empezar()" /></td>
+                    </tr>
+                    <tr>
+                        <td class="dgd"><a href="https://www.dagesdom.com.do"><label>Desarrollado por DAGESDOM</label></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

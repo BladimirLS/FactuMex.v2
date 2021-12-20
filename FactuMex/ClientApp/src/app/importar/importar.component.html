@@ -1,0 +1,101 @@
+
+<div class="wrap" #wrap>
+    <label class="loading" *ngIf="cargando"><img src="/img/loader.gif" width="64" height="64" /><br /> Procesando...  </label>
+    <label class="lblAnex"><img src="/img/text-file-3-32.png" width="32" /> Cargar Archivo</label> <input #au type="file" class="fileAU" (change)="AgregaArchivo($event)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+    <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Cargar'">
+        <label>{{notif.Msj}}</label>
+    </div>
+    <div class="row fileWrap">
+        <div class="col-sm-11 text-center Files">
+            <div class="row">
+                <div class="col-sm-3" *ngFor="let f of files">
+                    <div (click)="CargaTabla(f)" class="fIcon" [ngClass]="{'fileSel':currentArchivo==f}">
+                        <img src="/img/Excl.png" width="32" /><br />
+                        <label>{{f.Nombre}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row" *ngIf="Columns!=null && currentArchivo!=null">
+        <div class="col-lg-12">
+            <div class="previaWrap" #previa>
+                <table class="previa">
+                    <thead>
+                        <tr>
+                            <th colspan="20">Vista Previa de {{currentArchivo.Nombre}}</th>
+                        </tr>
+                        <tr>
+                            <th *ngFor="let h of Columns">
+                                <label>{{h.Label}}</label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let b of tResults">
+                            <td *ngFor="let p of b.Result">
+                                <label>{{p.Value}}</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="currentArchivo!=null">
+        <div class="col-sm-12">
+            <input name="tipoTabla" type="radio" (click)="selActualizacion('Cliente')" checked="checked" /> <label>Actualizar Clientes</label> &nbsp;
+            <input name="tipoTabla" type="radio" (click)="selActualizacion('Asignacion')" /> <label>Actualizar Asignaciones</label><br />
+        </div>
+    </div>
+    <div class="relWrap" *ngIf="currentArchivo!=null">
+        <div class="row">
+            <div class="col-sm-3">
+                <label> Origen</label><br />
+                <select class="sel" [(ngModel)]="origen">
+                    <option *ngFor="let col of ColumnsAsignacion">{{col.Label}}</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label> Destino</label><br />
+                <select class="sel" [(ngModel)]="destino">
+                    <option *ngFor="let c of camposActual">{{c.Destino}}</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <label class="btnActn" (click)="Relaciona($event)"><img src="/img/white-icon-png-25.jpg" width="32" /><br />Relacionar</label>
+                <label class="btnActn" (click)="showGuardar=true;"><img src="/img/clouds-32.png" /><br />Guardar</label><span class="guardar" *ngIf="showGuardar"><label>Nombre de la Plantilla</label><br /><input type="text" (keydown)="GuardaRel($event)" [(ngModel)]="plantillaActual" /></span>
+                <label class="btnActn" (click)="CargaRel($event)"><img src="/img/download-2-32.png" width="32" /><br />Cargar</label><span class="guardar" *ngIf="showCargar"><label>Nombre de la Plantilla</label><br /><select [(ngModel)]="plantillaSel" (keydown)="plantillaSel='';showCargar=false;" (change)="cargaPlantilla()"><option *ngFor="let p of plantillasSel">{{p}}</option></select></span>
+                <label class="btnActn" (click)="Actualizar($event)"><img src="/img/gear-32.png" /><br />Actualizar</label>
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Actualizar'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="previa">
+                    <thead>
+                        <tr>
+                            <th colspan="20">Columnas Relacionadas</th>
+                        </tr>
+                        <tr>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of camposRel">
+                            <td>{{r.Origen}}</td>
+                            <td>{{r.Destino}}</td>
+                            <td style="text-align:center"><img src="/img/delete-icon-image-15.jpg" width="16" (click)="cancelaRel(r)" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

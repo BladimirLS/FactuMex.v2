@@ -1,0 +1,181 @@
+<div *ngIf="showPermisos" class="wndPermisos">
+    &nbsp;<img src="/img/closebtn.png" (click)="togglePermisos('close')" width="16" height="16" />
+    <div *ngFor="let gr of lstGrupo">
+        <div class="grupoPermiso">
+            <label>{{gr}}</label>
+            <table class="permiso" align="center">
+                <tr *ngFor="let item of retornaPermisos(gr)">
+                    <td>{{item.Permiso}}</td>
+                    <td><input type="checkbox" (click)="togglePermiso(item,$event)" [checked]="verificaPermiso(item)" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="wrap" #wrap>
+    <div class="lblAnex">
+        <ul class="ulMenu">
+            <li><label class="titFn">Gestión de Usuarios</label></li>
+            <li (click)="NuevoUsuario()">
+                <img src="/img/user.png" width="32" />Nuevo
+            </li>
+            <li (click)="GuardaUsuario()">
+                <img src="/img/cloud.png" width="32" />&nbsp;Guardar
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+            <li>
+                <img src="/img/shred.jpg" width="32" />Borrar
+            </li>
+            <li (click)="togglePermisos('show')">
+                <img src="/img/check2.png" width="24" />Permisos
+            </li>
+            <li (click)="clrNotif()">
+                <img class="imgRnd" *ngIf="this.Archivos.length>0" src="data:image/png;base64,{{this.Archivos[0].Base64Url}}" width="32" height="32" />
+                <img class="imgRnd" *ngIf="Archivos.length==0 && this.usuarioActual.Foto.length==0" src="/img/c.png" width="32" height="32" />
+                <img class="imgRnd" *ngIf="usuarioActual.Foto.length>0 && !this.Archivos.length>0" src="/apiv1/descimg/{{usuarioActual.Foto}}" width="32" height="32" />&nbsp;Foto
+                <input #au type="file" class="fileAU" (change)="AgregaArchivo($event)" accept="image/x-png,image/gif,image/jpeg" />
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Foto'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row frmUsuario">
+        <div class="col-lg-8 Frm">
+            <div class="row">
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==1}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="usuarioActual.Nombre.length>0"><label>Nombre</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Nombre del Usuario" [(ngModel)]="usuarioActual.Nombre" class="inpFrm" (focus)="foc=1;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Nombre'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==2}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="usuarioActual.Cedula.length>0"><label>Cedula</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Cedula o PPT" [(ngModel)]="usuarioActual.Cedula" class="inpFrm" (focus)="foc=2;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Cedula'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==3}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="usuarioActual.Email.length>0"><label>Correo Electronico</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Correo Electronico" [(ngModel)]="usuarioActual.Email" class="inpFrm" (focus)="foc=3;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Email'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==4}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="usuarioActual.Telefono.length>0"><label>Telefono</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Telefono" [(ngModel)]="usuarioActual.Telefono" class="inpFrm" (focus)="foc=4;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Telefono'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==5}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="usuarioActual.Pwd.length>0"><label>Contrasena</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="password" placeholder="Contrasena" [(ngModel)]="usuarioActual.Pwd" class="inpFrm" (focus)="foc=5;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Pwd'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==6}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="repPwd.length>0"><label>Repetir Contrasena</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="password" placeholder="Repetir Contrasena" [(ngModel)]="repPwd" class="inpFrm" (focus)="foc=6;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='repPwd'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 cajaResultado">
+            <div class="row">
+                <div class="col-lg-12">
+                    <input type="text" placeholder="BUSCAR USUARIO" [(ngModel)]="buscar" (keydown)="busca($event)" class="buscar" />
+                </div>
+            </div>
+            <label class="loading" *ngIf="cargando"><img src="/img/loader.gif" width="64" height="64" /><br /> Procesando...  </label>
+
+            <div class="row resultado" *ngFor="let u of usuarios" (click)="cargaUsuario(u);">
+                <div class="col-lg-12">
+                    <div class="row ">
+                        <div class="col-sm-2 resultadoImg">
+                            <img src="/apiv1/descimg/{{u.Foto}}" width="64" height="64" />
+                        </div>
+                        <div class="col-sm-10">
+                            <ul class="infoUsuario">
+                                <li><label>{{u.Cedula}}</label></li>
+                                <li><label>{{u.Nombre}}</label></li>
+                                <li><label>{{u.Email}}</label></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" *ngIf="usuarios.length==0">
+                <div class="col-lg-12 ">
+                    <div class="row ">
+                        <div class="col-sm-12">
+                            <label>  No se encontraron resultados. Los criterios de busqueda son Nombre, Cedula y Correo Electronico. Intenta con palabras mas simples y evita utilizar caracteres especiales.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

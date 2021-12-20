@@ -1,0 +1,57 @@
+<div class="wrap" #wrap>
+    <label class="loading" *ngIf="cargando"><img src="/img/loader.gif" width="64" height="64" /><br /> Procesando...  </label>
+    <div class="lblAnex">
+        <ul class="ulMenu">
+            <li (click)="GuardaConfig()">
+                <img src="/img/clouds-32.png" width="32" />&nbsp;Guardar
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row frmUsuario">
+        <div class="col-lg-11 Frm">
+            <div class="row">
+                <div class="col-lg-12" [ngClass]="{'inpFocus':foc==1}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="ano>0"><label>Año</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" placeholder="Año" [(ngModel)]="ano" class="inpFrm" (focus)="foc=1;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='ano'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-5 colpd" [ngClass]="{'inpFocus':foc==2}" *ngFor="let n of numbers">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td class="tdFile">
+                                <label class="lblAnex2">
+                                    Anexo #{{n}} / {{getLabel(n)}}<br /><label *ngIf="existsIndex(n-1)" class="lblNombre"> {{getName(n-1)}}</label>
+                                    <input type="file" (change)="AgregaArchivo($event,n-1);" placeholder="Anexo #{{n}}  / {{getLabel(n)}}" class="inpFl" />
+                                </label>
+
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='At'+(n+1)">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                                <label class="btnPanel" *ngIf="existsIndex(n-1)">
+                                    <a href="/apiv1/descanexo/{{getName(n-1)}}"><img src="/img/paper-clip-5-256.png" width="64" height="64" /></a>
+                                </label>
+                                <label class="btnPanel2" (click)="DeleteConfig(n-1)" *ngIf="existsIndex(n-1)">
+                                    <img src="/img/trash-2-256.png" width="64" height="64" />
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+.btnDomex {
+    font-family: 'Open Sans';
+    font-weight: bold;
+    font-size: 20px;
+    background-color: black;
+    background: linear-gradient(180deg, gray 0.5%, black 100%);
+    color: #FCD91D;
+    border: 0px solid transparent;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 10px;
+    margin-top:10px;
+}
+
+::placeholder { /* Firefox, Chrome, Opera */
+    color: #0047bb;
+
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #0047bb;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #0047bb;
+} 
+.logo {
+    margin-top: 20vh;
+    margin-left: 16%;
+}
+input[type=text], input[type=password] {
+    outline: none;
+    -webkit-user-select: none;
+}
+@media (max-width: 870px) {
+    .Panel {
+        background-color: transparent;
+        width: 80%;
+        height: 100vh;
+        margin-left: 10%;
+    }
+}
+@media (min-width: 871px) {
+    .Panel {
+        background-color: transparent;
+        width: 30%;
+        height: 100vh;
+        margin-left: 33%;
+    }
+}
+.wrap {
+    height: 100vh;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-image:url('/img/deliverywpp.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    z-index:500;
+}
+
+    .wrap > div {
+        float: left
+    }
+
+.bigSquare {
+    background: #FCD91D;
+    background: linear-gradient(180deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+    width: 70%;
+    height: 100vh;
+}
+
+
+.posTable {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white;
+}
+.centerdiv {
+margin:auto;
+margin-top:40vh;
+height:60px;
+width:100%;
+}
+.logCont {
+    margin-top: 10vh;
+    height: auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+.loginHdr {
+    background: #FCD91D;
+    background: linear-gradient(180deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.notLoginHdr {
+background-color:transparent;
+border:none none;
+}
+.tdNone {
+    visibility: hidden
+}
+
+.tLogin {
+    width: 90%;
+    height: auto;
+}
+
+.labelFrm {
+    font-family: Calibri;
+    font-size: small;
+        margin-top:30px;
+}
+
+.inpFrm {
+    font-family: Calibri;
+    font-size: small;
+    border: 1px solid transparent;
+    background-color: transparent;
+    width: 200px;
+    position: absolute;
+    color: #0047bb;
+    margin-left: 10px;
+}
+
+.tdInp {
+    border-bottom: 1px solid #0047bb;
+    width: 100%;
+    padding-top: 20px;
+    visibility:visible;
+}
+    .tdInp > img {
+        background-color: #FCD91D;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 2px 2px 2px 2px;
+    }
+.btnSS {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    width: 100%;
+    font-family: Calibri;
+    font-size: medium;
+    background: #FCD91D;
+    background: linear-gradient(90deg, rgb(252,217,29) 0%, rgb(253,231,23) 100%);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 40px;
+    color: black;
+}
+.tdImg {
+    text-align: center;
+    padding-top:20px;
+    padding-bottom: 5vh;
+}
+.foto2 {
+    border: 2px solid #E5E5E5;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+.foto {
+}
+.lblNotif {
+font-family:Calibri;
+font-size:medium;
+color:black;
+margin-top:20px;
+}
+.dgd {
+text-align:right;
+font-family:Calibri;
+font-size:x-small;
+color:black;
+}

@@ -1,0 +1,177 @@
+<div *ngIf="showPermisos" class="wndPermisos">
+    &nbsp;<img src="/img/closebtn.png" (click)="togglePermisos('close')" width="16" height="16" />
+    <div *ngFor="let gr of lstGrupo">
+        <div class="grupoPermiso">
+            <label>{{gr}}</label>
+            <table class="permiso" align="center">
+                <tr *ngFor="let item of retornaPermisos(gr)">
+                    <td>{{item.Permiso}}</td>
+                    <td><input type="checkbox" (click)="togglePermiso(item,$event)" [checked]="verificaPermiso(item)" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="wrap" #wrap>
+    <div class="lblAnex">
+        <ul class="ulMenu">
+            <li><label class="titFn">Gestión de Productos</label></li>
+            <li (click)="nuevoItem()">
+                <img src="/img/box.png" width="28" />&nbsp;Nuevo
+            </li>
+            <li (click)="guardaItem()">
+                <img src="/img/cloud.png" width="32" />&nbsp;Guardar
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+            <li>
+                <img src="/img/shred.jpg" width="32" />Borrar
+            </li>
+        </ul>
+    </div>
+
+    <div class="row frmUsuario">
+        <div class="col-lg-11 Frm">
+            <!-- Generales del Item -->
+            <div class="row">
+                <div class="col-lg-12" [ngClass]="{'inpFocus':foc==2}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="item.Nombre.length>0"><label>Nombre</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Nombre del Item" [(ngModel)]="item.Nombre" class="inpFrm" (focus)="foc=2;" (focusout)="foc=0;" (keydown)="clrNotif(); cargaEmpresaxRNC($event);" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='item.Nombre'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12" [ngClass]="{'inpFocus':foc==3}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="item.Descripcion.length>0"><label>Descripción del Item</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Descripción del Item" [(ngModel)]="item.Descripcion" class="inpFrm" (focus)="foc=3;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='item.Descripcion'">
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--SLA Entregas-->
+            <div class="row">
+                <div class="col-lg-3">
+                    <label><input type="checkbox" [(ngModel)]="verSla" />&nbsp;&nbsp;SLA de Entregas</label>
+                </div>
+            </div>
+            <div class="frmWrapper" *ngIf="verSla">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <select [(ngModel)]="serv">
+                            <option value="Entrega">Entrega</option>
+                            <option value="Recogida">Recogida</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <select [(ngModel)]="cProv">
+                            <option *ngFor="let p of provincia" value="{{p.Idprovincia}}">{{p.Provincia1}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="number" [(ngModel)]="duracion" class="inpFrm text-right" />
+                        <label>&nbsp;Días</label>
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="button" class="btnDomex" value="AGREGAR" (click)="agregaSLA();" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngFor="let s of sla" class="col-lg-3 cardDomex">
+
+                        <table align="center">
+                            <tr>
+                                <td>Servicio</td>
+                                <td>{{s.TipoSla}}</td>
+                            </tr>
+                            <tr>
+                                <td>Provincia</td>
+                                <td>{{retProvincia(s.Idprovincia)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Duración</td>
+                                <td>{{s.Duracion}}&nbsp;Días</td>
+                            </tr>
+                        </table>
+
+                        <div class="tIcons">
+                            <label class="imgActn" (click)="borraSLA(s);">
+                                <img src="/img/trash.png" width="24" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Precio de Entrega -->
+            <div class="row">
+                <div class="col-lg-3">
+                    <label><input type="checkbox" [(ngModel)]="verPr" />&nbsp;&nbsp;Precio de Entregas</label>
+                </div>
+            </div>
+            <div class="frmWrapper" *ngIf="verPr">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <select [(ngModel)]="cProv">
+                            <option *ngFor="let p of provincia" value="{{p.Idprovincia}}">{{p.Provincia1}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <select [(ngModel)]="cMoneda">
+                            <option *ngFor="let m of moneda" value="{{m.Idmoneda}}">{{m.Moneda1}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="number" [(ngModel)]="monto" class="inpFrm text-right" />
+                        <label>&nbsp;</label>
+                    </div>
+                    <div class="col-lg-1">
+                        <input type="button" class="btnDomex" value="AGREGAR" (click)="agregaPrecio();" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div *ngFor="let p of precio" class="col-lg-3 cardDomex">
+
+                        <table align="center">
+                            <tr>
+                                <td>Provincia</td>
+                                <td>{{retProvincia(p.Idprovincia)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Moneda</td>
+                                <td>{{retMoneda(p.Moneda)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Precio</td>
+                                <td>{{p.Precio}}&nbsp;Días</td>
+                            </tr>
+                        </table>
+                        <div class="tIcons">
+                            <label class="imgActn" (click)="borraPrecio(p);">
+                                <img src="/img/trash.png" width="24" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

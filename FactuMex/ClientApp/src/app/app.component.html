@@ -1,0 +1,12 @@
+<div *ngIf="imInvisible" (click)="imInvisible=false;" class="VerMenu doNotPrint"><img src="/img/hamenu.png" width="32" /></div>
+<div class='menu doNotPrint' [ngClass]="{'min':!isExpanded,'max':isExpanded}" (window:resize)="onResize($event)" *ngIf="!imInvisible">
+    <app-nav-menu></app-nav-menu>
+</div>
+<div class='wrkSpace'>
+    <router-outlet></router-outlet>
+</div>
+
+
+<login *ngIf="!isLogged"></login>
+<popup [ngClass]="{'show': ShowPopup,'hide': !ShowPopup}"></popup>
+<vprevia *ngIf="vistaPrevia"></vprevia>

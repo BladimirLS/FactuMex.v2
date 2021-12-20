@@ -1,0 +1,50 @@
+<div class="wrap" #wrap>
+    <div class="lblAnex">
+        <ul class="ulMenu">
+            <li><label class="titFn">Tasa de Cambio US$</label></li>
+            <li (click)="nuevaTasa()">
+                <img src="/img/briefcase-256.png" width="28" />&nbsp;Nueva
+            </li>
+            <li (click)="guardaTasa()">
+                <img src="/img/cloud.png" width="32" />&nbsp;Guardar
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="row buscaFac">
+        <div class="col-lg-12">
+            <table cellspacing="0" cellpadding="0" class="tInput">
+                <tr>
+                    <td><span *ngIf="tasa.Tasa<53"><label>Tasa de Cambio</label> </span>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Tasa de Cambio" [(ngModel)]="tasa.Tasa" class="inpFrm" (focus)="foc=1;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                        <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='tasa.tasa'">
+                            <img src="/img/exc.png" width="32" />
+                            <label>{{notif.Msj}}</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-3 cardDomex" *ngFor="let t of tasas">
+            <table align="center">
+                <tr>
+                    <td>Cód. Tasa</td>
+                    <td>{{t.Idtasa}}</td>
+                </tr>
+                <tr>
+                    <td>Fecha</td>
+                    <td>{{t.Fecha}}</td>
+                </tr>
+                <tr>
+                    <td>Tasa</td>
+                    <td>{{t.Tasa}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<label class="loading" *ngIf="cargando"><img src="/img/loader.gif" width="64" height="64" /><br /> Procesando...  </label>
+<div class="fr" [ngClass]="{'min':!fscreen,'max':fscreen}" [style.visibility]="!isVisible? 'hidden':'visible'">
+    <div class="row">
+        <div class="col-lg-12 menu doNotPrint">
+            <label (click)="cerrar()">X</label>
+            <label (click)="fullscreen()">■</label>
+        </div>
+    </div>
+    <div [innerHtml]="Frm" #frm class="form"></div>
+</div>

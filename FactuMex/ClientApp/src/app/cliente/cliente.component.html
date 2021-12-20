@@ -1,0 +1,238 @@
+<div class="wrap" #wrap>
+    <div class="lblAnex" *ngIf="!wizardFac">
+        <ul class="ulMenu">
+            <li><label class="titFn">Gestión de Clientes</label></li>
+            <li (click)="nuevoCliente()">
+                <img src="/img/customer.png" width="32" />
+                Nuevo
+            </li>
+            <li (click)="guardaCliente()">
+                <img src="/img/cloud.png" width="32" />&nbsp;Guardar
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <img src="/img/exc.png" width="32" />
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </li>
+            <li>
+                <img src="/img/shred.jpg" width="32" />Borrar
+            </li>
+        </ul>
+    </div>
+
+    <div class="row frmUsuario">
+        <div class="col-lg-11 Frm">
+            <!-- Generales del Cliente -->
+            <div class="row">
+                <div class="col-lg-8" *ngIf="wizardFac"></div>
+                <div class="col-lg-4" *ngIf="wizardFac">
+                    <input type="button" class="btnDomex" value="GUARDAR NUEVO CLIENTE Y CONTINUAR FACTURA" (click)="guardaCliFactura();" />
+                </div>
+                <div class="col-lg-2">
+                    <label> <input type="radio" name="tipoEnte" checked="checked" (click)="setOrg()" />&nbsp;&nbsp;Organización&nbsp;&nbsp;</label>
+                    <label><input type="radio" name="tipoEnte" (click)="setPer()" />&nbsp;&nbsp;Persona</label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==1}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cliente.Nombre.length>0"><label>{{ttlNombre}}</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="{{ttlNombre}}" [(ngModel)]="cliente.Nombre" class="inpFrm" (focus)="foc=1;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cliente.nombre'">
+                                    <img src="/img/exc.png" width="32" />
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==2}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="rnc.length>0"><label>{{ttlID}}</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="{{ttlID}}" [(ngModel)]="rnc" class="inpFrm" (focus)="foc=2;" (focusout)="foc=0;" (keydown)="clrNotif(); cargaEmpresaxRNC($event);" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cliente.id'">
+                                    <img src="/img/exc.png" width="32" />
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==3}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cliente.Correo.length>0"><label>Correo Electronico</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Correo Electrónico" [(ngModel)]="cliente.Correo" class="inpFrm" (focus)="foc=3;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Email'">
+                                    <img src="/img/exc.png" width="32" />
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==4}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cliente.Tel1.length>0"><label>Teléfono 1</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Teléfono 1" [(ngModel)]="cliente.Tel1" class="inpFrm" (focus)="foc=4;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='cliente.tel1'">
+                                    <img src="/img/exc.png" width="32" />
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==3}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cliente.Tel2.length>0"><label>Teléfono 2</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Teléfono 2" [(ngModel)]="cliente.Tel2" class="inpFrm" (focus)="foc=3;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Telefono2'">
+                                    <img src="/img/exc.png" width="32" />
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6" [ngClass]="{'inpFocus':foc==4}">
+                    <table cellspacing="0" cellpadding="0" class="tInput">
+                        <tr>
+                            <td><span *ngIf="cliente.Tel3.length>0"><label>Teléfono 3</label> </span>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Teléfono 3" [(ngModel)]="cliente.Tel3" class="inpFrm" (focus)="foc=4;" (focusout)="foc=0;" (keydown)="clrNotif()" />
+                                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Telefono'">
+                                    <img src="/img/exc.png" width="32" />
+                                    <label>{{notif.Msj}}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Dirección de Facturación -->
+            <div class="row">
+                <div class="col-lg-3">
+                    <label><input type="checkbox" [(ngModel)]="dirFac" />&nbsp;&nbsp;Dirección de Facturación</label>
+                </div>
+            </div>
+            <div *ngIf="dirFac">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Correo" class="inpFrm" placeholder="Correo Electrónico de Facturación" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Calle" class="inpFrm" placeholder="Calle" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Nro" class="inpFrm" placeholder="Número" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Edificio" class="inpFrm" placeholder="Edificio" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Apto" class="inpFrm" placeholder="Apartamento" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Residencial" class="inpFrm" placeholder="Residencial" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Sector" class="inpFrm" placeholder="Sector" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Municipio" class="inpFrm" placeholder="Municipio" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Provincia" class="inpFrm" placeholder="Provincia" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirFact.Pais" class="inpFrm" placeholder="País" />
+                    </div>
+                </div>
+            </div>
+            <!-- Dirección de Entrega -->
+            <div class="row">
+                <div class="col-lg-3">
+                    <label><input type="checkbox" [(ngModel)]="dirEnt" />&nbsp;&nbsp;Dirección de Entrega</label>
+                </div>
+            </div>
+            <div *ngIf="dirEnt">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Correo" class="inpFrm" placeholder="Correo Electrónico de Rastreo" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Calle" class="inpFrm" placeholder="Calle" />
+                        <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='dirent.calle'">
+                            <img src="/img/exc.png" width="32" />
+                            <label>{{notif.Msj}}</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Nro" class="inpFrm" placeholder="Número" />
+                        <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='dirent.nro'">
+                            <img src="/img/exc.png" width="32" />
+                            <label>{{notif.Msj}}</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Edificio" class="inpFrm" placeholder="Edificio" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Apto" class="inpFrm" placeholder="Apartamento" />
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Residencial" class="inpFrm" placeholder="Residencial" />
+                    </div>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="cSec">
+                            <option *ngFor="let s of secs" value="{{s.Idlocalidad}}">{{s.Localidad}}</option>
+                        </select>
+                        <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='dirent.sector'">
+                            <img src="/img/exc.png" width="32" />
+                            <label>{{notif.Msj}}</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="cMun" (change)="cargaSec($event)">
+                            <option *ngFor="let m of muns" value="{{m.Idmunicipio}}">{{m.Municipio1}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <select [(ngModel)]="cProv" (change)="cargaMun($event)">
+                            <option *ngFor="let p of provincia" value="{{p.Idprovincia}}">{{p.Provincia1}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" [(ngModel)]="dirEntr.Pais" class="inpFrm" placeholder="País" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

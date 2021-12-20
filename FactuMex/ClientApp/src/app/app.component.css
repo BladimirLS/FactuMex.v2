@@ -1,0 +1,58 @@
+app-nav-menu, .cnt {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+.show {
+    visibility: visible
+}
+
+.hide {
+    visibility: hidden;
+    display: none;
+}
+
+.menu {
+    height: 100vh;
+    float: left;
+}
+
+.min {
+    width: 35px;
+}
+
+.max {
+    width: 10%;
+}
+
+input[type=text], input[type=password] {
+    outline: none;
+    -webkit-user-select: none;
+}
+
+.wrkSpace {
+    background-color: white;
+}
+
+.VerMenu {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 160;
+    background-color: #FCD91D;
+    padding: 5px 5px 5px 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: 1px solid black;
+    -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
+}
+
+@media print {
+    .doNotPrint {
+        display: none !important;
+    }
+}

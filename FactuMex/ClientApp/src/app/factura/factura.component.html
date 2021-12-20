@@ -1,0 +1,319 @@
+<div class="wrap" #wrap>
+    <div class="lblAnex doNotPrint">
+        <ul class="ulMenu">
+            <li><label class="titFn">Facturación</label></li>
+            <li [ngClass]="{'pasoSel':pasoSel==1}">
+                <label class="numPaso">1</label>
+                <img src="/img/customer.png" width="32" />&nbsp;Seleccionar el Cliente
+            </li>
+            <li [ngClass]="{'pasoSel':pasoSel==2}">
+                <label class="numPaso">2</label>
+                <img src="/img/box.png" width="32" />&nbsp;Seleccionar el Producto
+            </li>
+            <li [ngClass]="{'pasoSel':pasoSel==3}">
+                <label class="numPaso">3</label>
+                <img src="/img/det.png" width="32" />&nbsp;Detalle de Facturación
+            </li>
+            <li [ngClass]="{'pasoSel':pasoSel==4}">
+                <label class="numPaso">4</label>
+                <img src="/img/printer.png" width="32" />&nbsp;Emitir Factura
+            </li>
+            <li *ngIf="pasoSel>1 && this.f.Fac.Idfactura == '0'" (click)="regresar()">
+                <img src="/img/back.png" width="32" />&nbsp;Regresar
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row" *ngIf="!nuevoCliente">
+    <div class="col-sm-9">&nbsp;</div>
+    <div class="col-sm-2"><input type="button" class="btnDomex" value="¿NUEVO CLIENTE?" (click)="nuevoCliente=true;" *ngIf="pasoSel==1 && !nuevoCliente" /></div>
+</div>
+<lstcliente [wizardFac]="true" (valueChange)="selCliente($event);" *ngIf="pasoSel==1 && !nuevoCliente"></lstcliente>
+<cliente [wizardFac]="true" *ngIf="pasoSel==1 && nuevoCliente" (clientSaved)="selCliente($event);"></cliente>
+
+<lstproducto [wizardFac]="true" (valueChange)="selItem($event);" *ngIf="pasoSel==2"></lstproducto>
+<div *ngIf="pasoSel==3" class="detalleFac">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <label class="lblTitulo">Informaciones Generales del Cliente</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Cliente:</label>
+                &nbsp;<label>{{f.Cliente.Ente.Nombre}}</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Identificación:</label>
+                &nbsp;<label>{{f.Cliente.Ente.Id}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.Ente.Correo.length>0">
+                <label class="lblBd">Correo:</label>
+                &nbsp;<label>{{f.Cliente.Ente.Correo}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.Ente.Tel1.length>0">
+                <label class="lblBd">Teléfono 1:</label>
+                &nbsp;<label>{{f.Cliente.Ente.Tel1}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.Ente.Tel2.length>0">
+                <label class="lblBd">Teléfono 2:</label>
+                &nbsp;<label>{{f.Cliente.Ente.Tel2}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.Ente.Tel3.length>0">
+                <label class="lblBd">Teléfono 3:</label>
+                &nbsp;<label>{{f.Cliente.Ente.Tel3}}</label>
+            </div>
+            <div class="col-lg-12 text-center">
+                <input type="button" class="btnDomex" value="EDITAR GENERALES DEL CLIENTE" (click)="editarCli();" />
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <label class="lblTitulo">Dirección de Facturación</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Correo.length>0">
+                <label class="lblBd">Correo:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Correo}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Calle.length>0">
+                <label class="lblBd">Calle:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Calle}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Nro.length>0">
+                <label class="lblBd">Nro:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Nro}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Edificio.length>0">
+                <label class="lblBd">Edificio:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Edificio}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Apto.length>0">
+                <label class="lblBd">Apto:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Apto}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Residencial.length>0">
+                <label class="lblBd">Residencial:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Residencial}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Sector.length>0">
+                <label class="lblBd">Sector:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Sector}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Municipio.length>0">
+                <label class="lblBd">Municipio:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Municipio}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Provincia.length>0">
+                <label class="lblBd">Provincia:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Provincia}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirFacturacion.Pais.length>0">
+                <label class="lblBd">Pais:</label>
+                &nbsp;<label>{{f.Cliente.DirFacturacion.Pais}}</label>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <label class="lblTitulo">Dirección de Entrega</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Correo.length>0">
+                <label class="lblBd">Correo:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Correo}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Calle.length>0">
+                <label class="lblBd">Calle:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Calle}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Nro.length>0">
+                <label class="lblBd">Nro:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Nro}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Edificio.length>0">
+                <label class="lblBd">Edificio:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Edificio}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Apto.length>0">
+                <label class="lblBd">Apto:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Apto}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Residencial.length>0">
+                <label class="lblBd">Residencial:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Residencial}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Sector.length>0">
+                <label class="lblBd">Sector:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Sector}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Municipio.length>0">
+                <label class="lblBd">Municipio:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Municipio}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Provincia.length>0">
+                <label class="lblBd">Provincia:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Provincia}}</label>
+            </div>
+            <div class="col-lg-12" *ngIf="f.Cliente.DirEntrega.Pais.length>0">
+                <label class="lblBd">Pais:</label>
+                &nbsp;<label>{{f.Cliente.DirEntrega.Pais}}</label>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <label class="lblTitulo">Facturación</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Producto:</label>
+                &nbsp;<label>{{i.Item.Nombre}}</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Descripción:</label>
+                &nbsp;<label>{{i.Item.Descripcion}}</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Moneda:</label>
+                <select [(ngModel)]="cMoneda">
+                    <option *ngFor="let m of moneda" value="{{m.Idmoneda}}">{{m.Moneda1}}</option>
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Precio:</label>
+                <input type="number" [(ngModel)]="precio" class="inpFrm text-right" readonly />
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Qty:</label>
+                <input type="number" class="inpFrm text-right" readonly value="1" />
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Monto:</label>
+                <input type="number" [(ngModel)]="monto" class="inpFrm text-right" readonly value="0" />
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Pagado:</label>
+                <input type="number" [(ngModel)]="pagado" class="inpFrm text-right" value="0" (keydown)="clrNotif();calc();"(keyup)="clrNotif();calc();"/>
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='pagado'">
+                    <img src="/img/exc.png" width="32" />
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Resta:</label>
+                <input type="number" readonly [(ngModel)]="resta" class="inpFrm text-right" value="0" />
+            </div>
+            <div class="col-lg-12 text-center">
+                <input type="button" class="btnDomex" value="EDITAR TARIFA" (click)="editarCli();" />
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <label class="lblTitulo">Comprobante Fiscal y Forma de Pago</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Empresa:</label>
+                <select [(ngModel)]="rnc" (change)="selComps()">
+                    <option *ngFor="let c of comps" value="{{c.Rnc}}">{{c.Empresa}}</option>
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Tipo Comprobante:</label>
+                <select [(ngModel)]="idcomp">
+                    <option *ngFor="let c of compsRNC" value="{{c.Idcomp}}">{{c.TipoComp}}</option>
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Forma de Pago:</label>
+                <select [(ngModel)]="fp" disabled>
+                    <option value="Contado">Contado</option>
+                    <option value="Crédito">Crédito</option>
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Método de Pago:</label>
+                <select [(ngModel)]="mp">
+                    <option value="Efectivo" selected="selected">Efectivo</option>
+                    <option value="TC">TC</option>
+                </select>
+            </div>
+            <div class="col-lg-12 text-center">
+                &nbsp;
+            </div>
+            <div class="col-lg-12 text-center">
+                &nbsp;
+            </div>
+            <div class="col-lg-12 text-center">
+                <input type="button" class="btnDomex" value="EMITIR FACTURA FISCAL" (click)="emiteFactura();" />
+                <div class="notif" *ngIf="notif.Msj.length>0 && notif.Src=='Guardar'">
+                    <img src="/img/exc.png" width="32" />
+                    <label>{{notif.Msj}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-12">
+                <label class="lblTitulo">Referencias</label>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Referencia:</label>
+                &nbsp;<select [(ngModel)]="f.Referencia.Ref">
+                    <option selected="selected">ACS</option>
+                    <option>IV</option>
+                    <option>NIV</option>
+                </select>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Ticket:</label>
+                &nbsp;
+                <input type="text" [(ngModel)]="ticket.Ref" class="inpFrm" (keydown)="agregaTicket($event);"  (focusin)="showTickets=true;showRels=false;"/>
+                <ul class="listaRef" *ngIf="showTickets">
+                    <li class="closePopup"><label class="x"  (click)="showTickets=false;">X</label></li>
+                    <li *ngFor="let t of f.Tickets" (click)="remueveTicket(t.Ref);ticket=t;">{{t.Ref}}</li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <label class="lblBd">Relacionados:</label>
+                &nbsp;
+                <input type="text" [(ngModel)]="rel.Ref" class="inpFrm" (keydown)="agregaRel($event);" (focusin)="showRels=true;showTickets=false;"/>
+                <ul class="listaRef" *ngIf="showRels">
+                    <li class="closePopup"><label class="x" (click)="showRels=false;">X</label></li>
+                    <li *ngFor="let r of f.Rels" (click)="remueveRel(r.Ref);rel=r;">{{r.Ref}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="pasoSel==4" class="EmisionFac">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-2 EmBtn" (click)="printFac()">
+            <table align="center">
+                <tr>
+                    <td class="titBtn"><img src="/img/printer.png" width="128" /></td>
+                </tr>
+                <tr>
+                    <td class="titBtn">Imprimir Factura</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2 EmBtn">
+            <table align="center">
+                <tr>
+                    <td class="titBtn"><img src="/img/email.png" width="128" /></td>
+                </tr>
+                <tr>
+                    <td class="titBtn">Enviar Factura por Correo</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2 EmBtn" (click)="nuevaFactura();">
+            <table align="center">
+                <tr>
+                    <td class="titBtn"><img src="/img/inv.png" width="128" /></td>
+                </tr>
+                <tr>
+                    <td class="titBtn">Nueva Factura</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

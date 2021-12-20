@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <title>Facturamex</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+
+        body {
+            overflow-x: hidden;
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+            background-color:#FCD91D;
+        }
+        input[type=text], input[type=password] {
+    outline: none;
+    -webkit-user-select: none;
+}
+        html {
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
+        }
+
+        .loadiv {
+            text-align: center;
+            background: url(./img/logo_domex.png) center center no-repeat;
+            height:300px;
+            width:500px;
+            }
+
+        .lblx {
+            font-size: 24px;
+            text-align:center;
+            width:100%;
+            margin-left:100px;
+        }
+
+        .cntLoad {
+            width: 354px;
+            height: 208px;
+            text-align: center;
+            position: absolute;
+            left: -175px;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 15vh;
+        }
+
+        .blink_me {
+            animation: blinker 1s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <app-root>
+        <div class="cntLoad blink_me">
+            <div class="loadiv">
+
+            </div>
+            <label class="lblx">Iniciando Facturamex...</label>
+        </div>
+    </app-root>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</body>
+</html>
